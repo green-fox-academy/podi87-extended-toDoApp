@@ -14,4 +14,11 @@ public class ToDo {
     this.created = created;
     this.updated = updated;
   }
+
+
+  @Override
+  public String toString() {
+    return ID + ";" + content + ";" + created + ";" + updated;
+  }
+
 }

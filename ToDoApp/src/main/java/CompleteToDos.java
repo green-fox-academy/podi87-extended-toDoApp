@@ -9,12 +9,7 @@ public class CompleteToDos extends Manipulations{
   }
 
   @Override
-  public void execute() {
-
-  }
-
-  @Override
-  public void execute(String input) {
+  public <T> void execute(T input1, List<ToDo> input2) {
 
   }
 

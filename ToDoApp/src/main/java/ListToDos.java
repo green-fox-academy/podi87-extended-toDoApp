@@ -2,8 +2,8 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListToDos extends Manipulations {
 
@@ -12,28 +12,22 @@ public class ListToDos extends Manipulations {
   }
 
   @Override
-  public void execute() {
-    allToDo = new ArrayList<>();
-    todoStr = new ArrayList<>();
+  public <T> void execute(T input1, List<ToDo> input2) {
+    List<String> todoStr = new ArrayList<>();
     try {
       todoStr = Files.readAllLines(Paths.get("data.txt"));
     } catch (IOException e) {
       e.getMessage();
     }
-    for (String s : todoStr) {
-      String [] stringArray = s.split(";");
-      LocalDate localDateOfs = LocalDate.parse(stringArray[2]);
-      allToDo.add(new ToDo((todoStr.indexOf(s)), stringArray[0], localDateOfs, localDateOfs));
+    if (todoStr.size() > 0) {
+      for (String str : todoStr) {
+        System.out.println(str.replace(';', ' '));
+      }
+    } else {
+      System.out.println("There are no ToDos today!");
     }
-    for (String str : todoStr) {
-      System.out.println(str.replace(';', ' '));
-    }
+
   }
 
 
-
-  @Override
-  public void execute(String input) {
-
-  }
 }

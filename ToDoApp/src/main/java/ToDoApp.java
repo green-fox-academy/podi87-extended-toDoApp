@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import static javafx.scene.input.KeyCode.T;
+
 public class ToDoApp {
   List<Manipulations> manipulations;
-  List<String> allToDos;
+  List<ToDo> allToDo = new ArrayList<>();
 
   public ToDoApp() {
     manipulations = new ArrayList<>();
@@ -25,13 +27,20 @@ public class ToDoApp {
   }
 
   public void engine(String[] args) {
-    if (args.length == 0) {
-      printUsage();
-    }
-    for (Manipulations m : manipulations) {
-      if (m.commandID.equals(args[0])) {
-        m.execute();
+    try {
+      if (args.length == 0) {
+        System.out.println(printUsage());
+      } else {
+        for (Manipulations m : manipulations) {
+          if (m.commandID.equals(args[0]) && args.length > 1) {
+            m.execute(args[1], allToDo);
+          } else if (m.commandID.equals(args[0])) {
+            m.execute(args[0], allToDo);
+          }
+        }
       }
+    } catch(IndexOutOfBoundsException e) {
+      e.getMessage();
     }
   }
 }
